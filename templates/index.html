@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    
+        <h1 style="font-family: 'Montserrat', sans-serif;">Create Task</i></h1>
+        
+     
+      <form  method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ forms.title|as_crispy_field }}
+              </div>
+    
+            <div class="form-group col-md-6 mb-0">
+                {{ forms.created_by|as_crispy_field }}
+            </div>
+        </div>
+
+        {{ forms.details|as_crispy_field }}
+        <div class="form-row">
+            {{forms.responsible_person|as_crispy_field}}
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6 mb-0">
+            {{ forms.date|as_crispy_field }}
+          </div>
+
+            <div class="form-group col-md-4 mb-0">
+                {{ forms.start_date|as_crispy_field }}
+              </div>
+            
+              <div class="form-group col-md-2 mb-0">
+                {{ forms.deadline|as_crispy_field }}
+              </div>
+        </div>
+
+        {{ forms.task_status_summary|as_crispy_field }}
+        
+        <input type="submit" class="btn btn-primary" value="submit" />
+      
+      </form>
+
+      
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-info">
+      <strong>{{message}}</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+{% endblock %}
+

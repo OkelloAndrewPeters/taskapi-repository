@@ -1,0 +1,53 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--style-->
+    <style>
+        .cardd{
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5),
+               0 6px 20px 0 rgba(0,0,0,0.39);
+        background: lightgrey;
+        margin-bottom : 5%;
+        border-radius: 25px;
+        padding : 2%;
+        overflow: auto;
+        resize: both;
+        text-overflow: ellipsis;
+  }
+  .card:hover{
+    background: lightblue;
+  }
+
+        
+        
+    </style>
+</head>
+<body>
+    <h1>Your Tasks</h1>
+    <button class = "btn"><a href="task">Add Task</a></button><hr />
+    {% for i in list %}
+      <div class="card">
+        <b>{{i.title}}</b>
+        <hr/>
+        {{i.date}}
+        <hr/>
+        {{i.details}}
+        <br />
+        <br />
+        <form action="/del/{{i.id}}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
+            {% csrf_token %}
+            <button value="remove" type="submit"  class="btn btn-primary" style="float: right;"><span class="glyphicon glyphicon-trash"></span> &nbsp; remove</button>
+          </form>
+      </div>
+      {% endfor%}
+</body>
+
+</html>
