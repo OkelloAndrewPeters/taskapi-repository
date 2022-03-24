@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <h1>Tasks List</h1>
+    <button class = "btn btn-success" style="border: none;"><a href="task" style=" text-decoration: none; color: aliceblue;">Add Task</a></button><hr />
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Created by</th>
+            <th scope="col">Responsible person</th>
+            <th scope="col">Deadline</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        {% for i in list %}
+        <tbody>
+          <tr>
+            <th scope="row">{{i.id}}</th>
+            <td><a href="update/{{i.id}}" style="text-decoration: none; color:blue;">{{ i.title }}</a></td>
+            <td>{{i.created_by }}</td>
+            <td>{{ i.responsible_person }}</td>
+            <td>{{ i.deadline }}</td>
+            <td>
+              <div class="input-group">
+                <select class="custom-select" id="inputGroupSelect04">
+                  <option selected>Select Action</option>
+                  <button><option value="1">edit</option></button>
+                  <option value="2"><a href="del/{{i.id}}" style="text-decoration: none; color:blue;">delete</a></option>
+                </select>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        {% empty %}
+            <p>There are no tasks in this list.</p>
+        {% endfor %}
+      </table>
+{% endblock %}
+
+

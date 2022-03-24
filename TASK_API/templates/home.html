@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <h1>Tasks List</h1>
+    <button class = "btn btn-success" style="border: none;"><a href="task" style=" text-decoration: none; color: aliceblue;">Add Task</a></button><hr />
+    <div class="form-group">
+      
+    </div>
+    {% for i in list %}
+      <div class="card">
+        <b>{{i.title}}</b>
+        <hr/>
+        {{i.date}}
+        <hr/>
+        {{i.details}}
+        <br />
+        <br />
+        <form action="/del/{{i.id}}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
+            {% csrf_token %}
+            <button value="remove" type="submit"  class="btn btn-primary" style="float: right;"><span class="glyphicon glyphicon-trash"></span> &nbsp;remove</button>
+        </form>
+        <div>
+          <button value="remove" type="submit"  class="btn btn-outline-primary" style="float: left; margin-bottom: 5px;">
+            <span class="glyphicon glyphicon-trash"></span><a href="update/{{i.id}}">Edit</a></button>
+        </div>
+        
+          {% empty %}
+            <p>There are no tasks in this list.</p>
+      </div>
+      {% endfor%}
+{% endblock %}
+
+
